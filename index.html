@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-9">
+  <title>Happy Birthday, Srishti! 🌟</title>
+  <style>
+    :root {
+      --primary: #ff6b6b;
+      --secondary: #4ecdc4;
+      --card-bg: rgba(255,255,255,0.97);
+      --accent: #e85d75;
+      --shadow: 0 8px 32px rgba(0,0,0,0.12);
+      --mountain-color: #48c6d0;
+      --mountain-opacity: 0.2;
+      --mountain-height: 30vh;
+      --rain-density: 60;
+      --rain-speed: 1.2s;
+      --rain-color: #fff7;
+      --butterfly-size: 50px;
+      --butterfly-speed: 15s;
+    }
+    html, body {
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      width: 100vw;
+      overflow-x: hidden;
+    }
+    body {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      font-family: 'Segoe UI', 'Comic Neue', cursive, sans-serif;
+      cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24'><path fill='red' d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/></svg>") 0 24, auto;
+    }
+    .mountains-bg {
+      position: fixed;
+      left: 0; bottom: 0;
+      width: 100vw;
+      height: var(--mountain-height);
+      z-index: 1;
+      pointer-events: none;
+      background: none;
+    }
+    .rain {
+      pointer-events: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      z-index: 10;
+    }
+    .drop {
+      position: absolute;
+      bottom: 100%;
+      width: 2px;
+      height: 60px;
+      background: linear-gradient(to bottom, var(--rain-color), #fff2 60%, transparent 100%);
+      opacity: 0.5;
+      border-radius: 1px;
+      animation: raindrop var(--rain-speed) linear infinite;
+    }
+    @keyframes raindrop {
+      to { transform: translateY(110vh); opacity: 0.2; }
+    }
+    .butterfly {
+      position: fixed;
+      width: var(--butterfly-size);
+      height: var(--butterfly-size);
+      pointer-events: none;
+      z-index: 20;
+      font-size: 2.2em;
+      animation: float var(--butterfly-speed) linear infinite;
+    }
+    .butterfly:nth-child(2) { left: 10vw; top: 20vh; animation-delay: -5s;}
+    .butterfly:nth-child(3) { left: 60vw; top: 30vh; animation-delay: -8s;}
+    @keyframes float {
+      0% { transform: translate(-10vw, 110vh) rotate(0deg); }
+      100% { transform: translate(110vw, -10vh) rotate(720deg); }
+    }
+    .hearts div {
+      position: fixed;
+      animation: floatHeart 8s linear infinite;
+      font-size: 24px;
+      opacity: 0;
+      z-index: 15;
+      pointer-events: none;
+    }
+    @keyframes floatHeart {
+      0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+      20% { opacity: 1; }
+      100% { transform: translateY(-10vh) rotate(720deg); opacity: 0; }
+    }
+    .nature-side {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      width: 120px;
+      z-index: 30;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: flex-start;
+    }
+    .nature-right { right: 0; align-items: flex-end; }
+    .nature-svg {
+      width: 90px;
+      margin-bottom: 32px;
+      opacity: 0.93;
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.08));
+      animation: sway 3s ease-in-out infinite alternate;
+    }
+    .nature-svg.small { width: 60px; margin-bottom: 16px; }
+    .nature-svg.tall { width: 110px; margin-bottom: 10px;}
+    .nature-bird {
+      width: 60px;
+      margin-bottom: 220px;
+      margin-top: 20px;
+      opacity: 0.85;
+      animation: flybird 8s linear infinite alternate;
+    }
+    @keyframes sway {
+      from { transform: translateY(0) rotate(-2deg);}
+      to   { transform: translateY(8px) rotate(2deg);}
+    }
+    @keyframes flybird {
+      from { transform: translateY(0) scaleX(1);}
+      to   { transform: translateY(-30px) scaleX(-1);}
+    }
+    .container {
+      width: 100vw;
+      display: block;
+      margin: 0;
+      padding: 0;
+    }
+    .birthday-card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 36px 28px 32px 28px;
+      max-width: 600px;
+      width: 95vw;
+      margin: 40px auto 60px auto;
+      box-shadow: var(--shadow);
+      border: 2px solid #f8a1a4;
+      position: relative;
+      z-index: 100;
+      text-align: center;
+    }
+    .birthday-card h1 {
+      color: var(--accent);
+      font-size: 2.2em;
+      margin-bottom: 20px;
+      font-weight: bold;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.12);
+      letter-spacing: 1px;
+    }
+    .typing-effect-container {
+      position: relative;
+      margin-bottom: 18px;
+    }
+    .typing-effect {
+      border-radius: 10px;
+      background: rgba(255,255,255,0.8);
+      color: #222;
+      font-size: 1.13em;
+      line-height: 1.8;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      padding: 18px 14px;
+      min-height: 210px;
+      text-align: left;
+      border-left: 4px solid var(--primary);
+      white-space: pre-line;
+      word-break: break-word;
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+    }
+    .highlight {
+      background: #fff2cc;
+      color: #b85d00;
+      padding: 2px 6px;
+      border-radius: 6px;
+      font-weight: bold;
+      display: inline-block;
+    }
+    #photoGallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 18px 0 22px 0;
+    }
+    .memory-card {
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s, border-color 0.3s;
+      width: 100%;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      border: 2.5px solid var(--primary);
+      box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+    }
+    .memory-card:hover {
+      transform: scale(1.07);
+      border-color: var(--secondary);
+    }
+    #loveMeter {
+      width: 88%;
+      height: 18px;
+      background: #eee;
+      border-radius: 10px;
+      margin: 0 auto 16px auto;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+    #loveFill {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      transform-origin: left;
+      transform: scaleX(0.2);
+      transition: transform 1s;
+    }
+    .rainbow-button {
+      background: linear-gradient(90deg, #ff6b6b, #f7b42c, #4ecdc4, #5f27cd);
+      color: #fff;
+      border: none;
+      padding: 14px 32px;
+      border-radius: 30px;
+      font-size: 1.15em;
+      cursor: pointer;
+      margin-top: 14px;
+      font-weight: bold;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.09);
+      letter-spacing: 1px;
+      transition: filter 0.2s;
+    }
+    .rainbow-button:hover { filter: brightness(1.1); }
+    @media (max-width: 900px) {
+      .nature-side { display: none; }
+    }
+    @media (max-width: 700px) {
+      .birthday-card { padding: 12px 5vw 18px 5vw; }
+      #photoGallery { grid-template-columns: repeat(2, 1fr); }
+      .birthday-card h1 { font-size: 1.3em; }
+      .typing-effect { font-size: 1em; padding: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <audio id="birthdayMusic" loop>
+    <source src="birthday.mp3" type="audio/mpeg">
+  </audio>
+  <!-- Mountains SVG background -->
+  <div class="mountains-bg">
+    <svg width="100%" height="100%" viewBox="0 0 1440 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#48c6d0" fill-opacity="0.2"
+            d="M0,224L48,213.3C96,203,192,181,288,170.7C384,160,480,160,576,181.3C672,203,768,245,864,250.7C960,256,1056,224,1152,218.7C1248,213,1344,235,1392,245.3L1440,256L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"/>
+    </svg>
+  </div>
+  <!-- Rain Effect -->
+  <div class="rain"></div>
+  <!-- Fireworks on the whole page -->
+  <div id="fireworks-page" style="position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:500;"></div>
+  <!-- Butterflies -->
+  <div class="butterfly" style="top:15vh; left:5vw; animation-delay:0s;">🦋</div>
+  <div class="butterfly" style="top:35vh; left:30vw; animation-delay:-5s;">🦋</div>
+  <div class="butterfly" style="top:60vh; left:60vw; animation-delay:-8s;">🦋</div>
+  <!-- Floating Hearts -->
+  <div class="hearts"></div>
+  <!-- Nature Visuals Left -->
+  <div class="nature-side nature-left">
+    <!-- Tall Tree -->
+    <svg class="nature-svg tall" viewBox="0 0 60 140">
+      <ellipse cx="30" cy="65" rx="28" ry="40" fill="#8fd19e"/>
+      <ellipse cx="30" cy="35" rx="22" ry="22" fill="#5ab47b"/>
+      <rect x="25" y="100" width="10" height="40" fill="#a67c52"/>
+    </svg>
+    <!-- Medium Tree -->
+    <svg class="nature-svg" viewBox="0 0 60 120">
+      <ellipse cx="30" cy="55" rx="28" ry="35" fill="#8fd19e"/>
+      <ellipse cx="30" cy="35" rx="22" ry="22" fill="#5ab47b"/>
+      <rect x="25" y="80" width="10" height="35" fill="#a67c52"/>
+    </svg>
+    <!-- Small Tree -->
+    <svg class="nature-svg small" viewBox="0 0 60 90">
+      <ellipse cx="30" cy="40" rx="20" ry="25" fill="#6fd19e"/>
+      <ellipse cx="30" cy="25" rx="14" ry="14" fill="#4ecdc4"/>
+      <rect x="26" y="60" width="8" height="22" fill="#a67c52"/>
+    </svg>
+    <!-- Bird SVG -->
+    <svg class="nature-bird" viewBox="0 0 60 30">
+      <path d="M5 20 Q30 5 55 20 Q40 10 30 25 Q20 10 5 20" fill="#f7d774"/>
+      <circle cx="10" cy="18" r="3" fill="#fff"/>
+      <circle cx="10" cy="18" r="1.2" fill="#333"/>
+    </svg>
+    <!-- Flower SVG -->
+    <svg class="nature-svg" viewBox="0 0 60 60">
+      <circle cx="30" cy="30" r="10" fill="#ffb7ef"/>
+      <ellipse cx="30" cy="16" rx="7" ry="14" fill="#f7b42c"/>
+      <ellipse cx="30" cy="44" rx="7" ry="14" fill="#f7b42c"/>
+      <ellipse cx="16" cy="30" rx="14" ry="7" fill="#f7b42c"/>
+      <ellipse cx="44" cy="30" rx="14" ry="7" fill="#f7b42c"/>
+    </svg>
+  </div>
+  <!-- Nature Visuals Right -->
+  <div class="nature-side nature-right">
+    <!-- Tall Tree -->
+    <svg class="nature-svg tall" viewBox="0 0 60 140">
+      <ellipse cx="30" cy="65" rx="28" ry="40" fill="#b7e6a5"/>
+      <ellipse cx="30" cy="35" rx="22" ry="22" fill="#6fd19e"/>
+      <rect x="25" y="100" width="10" height="40" fill="#a67c52"/>
+    </svg>
+    <!-- Medium Tree -->
+    <svg class="nature-svg" viewBox="0 0 60 120">
+      <ellipse cx="30" cy="55" rx="28" ry="35" fill="#b7e6a5"/>
+      <ellipse cx="30" cy="35" rx="22" ry="22" fill="#6fd19e"/>
+      <rect x="25" y="80" width="10" height="35" fill="#a67c52"/>
+    </svg>
+    <!-- Small Tree -->
+    <svg class="nature-svg small" viewBox="0 0 60 90">
+      <ellipse cx="30" cy="40" rx="20" ry="25" fill="#48c6d0"/>
+      <ellipse cx="30" cy="25" rx="14" ry="14" fill="#4ecdc4"/>
+      <rect x="26" y="60" width="8" height="22" fill="#a67c52"/>
+    </svg>
+    <!-- Bird SVG -->
+    <svg class="nature-bird" viewBox="0 0 60 30">
+      <path d="M5 20 Q30 5 55 20 Q40 10 30 25 Q20 10 5 20" fill="#ffd1dc"/>
+      <circle cx="50" cy="18" r="3" fill="#fff"/>
+      <circle cx="50" cy="18" r="1.2" fill="#333"/>
+    </svg>
+    <!-- Flower SVG -->
+    <svg class="nature-svg" viewBox="0 0 60 60">
+      <circle cx="30" cy="30" r="10" fill="#f7b42c"/>
+      <ellipse cx="30" cy="16" rx="7" ry="14" fill="#ffb7ef"/>
+      <ellipse cx="30" cy="44" rx="7" ry="14" fill="#ffb7ef"/>
+      <ellipse cx="16" cy="30" rx="14" ry="7" fill="#ffb7ef"/>
+      <ellipse cx="44" cy="30" rx="14" ry="7" fill="#ffb7ef"/>
+    </svg>
+  </div>
+  <div class="container">
+    <!-- Birthday Card -->
+    <div class="birthday-card">
+      <h1 contenteditable="true">Happy Birthday, <span id="namePlaceholder">Srishti</span>! 🎉</h1>
+      <div class="typing-effect-container" id="typingEffectContainer">
+        <div class="typing-effect" id="typingEffect"></div>
+      </div>
+      <div id="photoGallery">
+        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=facearea&w=400&h=400" class="memory-card" onclick="showMemory(1)">
+        <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=facearea&w=400&h=400" class="memory-card" onclick="showMemory(2)">
+        <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=facearea&w=400&h=400" class="memory-card" onclick="showMemory(3)">
+      </div>
+      <div id="loveMeter">
+        <div id="loveFill"></div>
+      </div>
+      <button onclick="startExperience()" class="rainbow-button" id="startBtn">Begin Magic ✨</button>
+    </div>
+  </div>
+  <script>
+    // Get background music element
+const birthdayMusic = document.getElementById('birthdayMusic');
+
+// Start music on "Begin Magic"
+function startExperience() {
+  document.body.style.background = "linear-gradient(135deg, #ff6b6b, #4ecdc4)";
+  document.getElementById('typingEffect').innerHTML = "";
+  charIndex = 0;
+  typeWriter();
+  document.getElementById('startBtn').disabled = true;
+  document.getElementById('startBtn').innerText = "Enjoy the Magic! 🎉";
+  // Play background music (browser allows after user click)
+  birthdayMusic.volume = 1; // Set to full for testing
+  birthdayMusic.play().catch(()=>{});
+}
+
+// Play firework sound on each firework (new Audio instance for overlap)
+function createFirework(x, y) {
+  const firework = document.createElement('div');
+  firework.style.position = 'absolute';
+  firework.style.left = x + 'px';
+  firework.style.top = y + 'px';
+  firework.style.width = '15px';
+  firework.style.height = '15px';
+  firework.style.borderRadius = '50%';
+  firework.style.background = `hsl(${Math.random() * 360}, 70%, 60%)`;
+  firework.style.opacity = '0.7';
+  firework.style.transform = 'scale(1)';
+  firework.style.transition = 'all 0.8s cubic-bezier(.17,.67,.83,.67)';
+  fireworksPage.appendChild(firework);
+
+  // Play your own firework sound (must be in the same folder or correct path)
+  const fwSound = new Audio("fireworks.mp3");
+  fwSound.volume = 1; // Set to full for testing
+  fwSound.play().catch(()=>{});
+
+  setTimeout(() => {
+    firework.style.transform = 'scale(4)';
+    firework.style.opacity = '0';
+  }, 10);
+
+  setTimeout(() => firework.remove(), 900);
+}
+
+    // Heartfelt message for typing effect
+    const heartfeltMessage = 
+`Happy Birthday, Srishti !
+
+Aaj tera special din hai, aur main chahta hoon tu hamesha khush rahe. Shayad tu nahi jaanti, par main tere liye kuch bhi kar sakta hoon. Teri khushi, tera sapna, tera future-sab kuch mere liye important hai. Main hamesha tere saath khada rahunga, chahe kuch bhi ho jaaye. Tere liye duniya se bhi lad sakta hoon, aur apne ghar walon se bhi, bas tu muskuraati rahe.
+
+Tu sirf meri best friend nahi hai, tu meri inspiration hai. Teri smile meri strength hai. I promise, main tere sapno ko pura karne mein tera sabse bada supporter rahunga. Teri har problem mein, har struggle mein, main tere saath hoon-hamesha.
+
+Tujhse ek baat bolni thi...
+Kabhi kabhi sochta hoon, shayad tu samjhe ya na samjhe, par... <span class="highlight">I love you, and I really mean it.</span> Tera saath mere liye sab kuch hai.
+
+Happy Birthday once again 💖💖💖`;
+
+    let charIndex = 0;
+    let typingInterval;
+
+    function typeWriter() {
+      const typingDiv = document.getElementById("typingEffect");
+      if (charIndex < heartfeltMessage.length) {
+        // For HTML tags in message
+        if (heartfeltMessage.substring(charIndex, charIndex+6) === "<span ") {
+          const endIdx = heartfeltMessage.indexOf("</span>", charIndex) + 7;
+          typingDiv.innerHTML += heartfeltMessage.substring(charIndex, endIdx);
+          charIndex = endIdx;
+        } else {
+          typingDiv.innerHTML += heartfeltMessage.charAt(charIndex) === "\n" ? "<br>" : heartfeltMessage.charAt(charIndex);
+          charIndex++;
+        }
+        typingInterval = setTimeout(typeWriter, 20);
+      } else {
+        clearTimeout(typingInterval);
+      }
+    }
+
+    // Fireworks on the whole page!
+    const fireworksPage = document.getElementById('fireworks-page');
+    document.addEventListener('mousemove', function(e){
+      createFirework(e.clientX, e.clientY);
+      document.getElementById('loveFill').style.transform = `scaleX(${Math.max(0.2, e.clientX/window.innerWidth)})`;
+    });
+    function createFirework(x, y) {
+      const firework = document.createElement('div');
+      firework.style.position = 'absolute';
+      firework.style.left = x + 'px';
+      firework.style.top = y + 'px';
+      firework.style.width = '15px';
+      firework.style.height = '15px';
+      firework.style.borderRadius = '50%';
+      firework.style.background = `hsl(${Math.random() * 360}, 70%, 60%)`;
+      firework.style.opacity = '0.7';
+      firework.style.transform = 'scale(1)';
+      firework.style.transition = 'all 0.8s cubic-bezier(.17,.67,.83,.67)';
+      fireworksPage.appendChild(firework);
+
+      setTimeout(() => {
+        firework.style.transform = 'scale(4)';
+        firework.style.opacity = '0';
+      }, 10);
+
+      setTimeout(() => firework.remove(), 900);
+    }
+
+    function startExperience() {
+  document.body.style.background = "linear-gradient(135deg, #ff6b6b, #4ecdc4)";
+  document.getElementById('typingEffect').innerHTML = "";
+  charIndex = 0;
+  typeWriter();
+  document.getElementById('startBtn').disabled = true;
+  document.getElementById('startBtn').innerText = "Enjoy the Magic! 🎉";
+  // Play background music (browser allows after user click)
+  birthdayMusic.volume = 1;
+  birthdayMusic.play().catch(()=>{});
+}
+
+    function showMemory(num) {
+      const memories = [
+        "Teri smile dekh kar lagta hai jaise sab kuch theek ho jayega 😄",
+        "Teri feelings ki respect karta hoon, chahe mujhe thoda dukh kyu na ho🤗",
+        "Teri smile iss photo mein sab kuch keh deti hai! 💕"
+      ];
+      alert(memories[num-1]);
+    }
+
+    // Rain Effect
+    function makeItRain() {
+      const rain = document.querySelector('.rain');
+      for (let i = 0; i < 60; i++) {
+        const drop = document.createElement('div');
+        drop.className = 'drop';
+        drop.style.left = Math.random() * 100 + 'vw';
+        drop.style.animationDelay = (Math.random() * 1.2) + 's';
+        drop.style.height = (40 + Math.random() * 30) + 'px';
+        rain.appendChild(drop);
+      }
+    }
+    makeItRain();
+
+    // Floating Hearts
+    function createHearts() {
+      const hearts = ['❤️', '💖', '💝'];
+      setInterval(() => {
+        const heart = document.createElement('div');
+        heart.textContent = hearts[Math.floor(Math.random()*hearts.length)];
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDelay = Math.random() * 2 + 's';
+        document.querySelector('.hearts').appendChild(heart);
+        setTimeout(() => heart.remove(), 8000);
+      }, 300);
+    }
+    createHearts();
+  </script>
+</body>
+</html>
