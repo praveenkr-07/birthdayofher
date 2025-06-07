@@ -4,6 +4,44 @@
   <meta charset="UTF-9">
   <title>Happy Birthday, Srishti! 🌟</title>
   <style>
+    .balloon-border {
+  width: 100%;
+  height: 80px; /* Reduce the height */
+  overflow: hidden;
+  position: relative; /* Not absolute */
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background: transparent;
+}
+.balloon-border img {
+  width: 100%;
+  height: 80px; /* Match the container height */
+  object-fit: cover;
+  display: block;
+}
+.birthday-card {
+  margin-top: 90px; /* Add margin so card is below balloons */
+  /* ...existing styles... */
+}
+.banner-image {
+  margin-top: 0;
+  position: relative;
+  top: 0;
+  left: 0;
+  transform: none;
+  z-index: 2;
+  max-width: 350px;
+}
+
+.birthday-text {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #e85d75;
+  margin-top: 10px;
+}
+
+
     :root {
       --primary: #ff6b6b;
       --secondary: #4ecdc4;
@@ -341,7 +379,8 @@
   <div class="container">
     <!-- Birthday Card -->
     <div class="birthday-card">
-      <h1 contenteditable="true">Happy Birthday, <span id="namePlaceholder">Srishti</span>! 🎉</h1>
+      <img src="banner.png" alt="Happy Birthday Banner" class="banner-image" />
+  <h1 class="birthday-text">Happy Birthday, Srishti! 🎉</h1>
       <div class="typing-effect-container" id="typingEffectContainer">
         <div class="typing-effect" id="typingEffect"></div>
       </div>
@@ -511,6 +550,62 @@ Happy Birthday once again 💖💖💖`;
       }, 300);
     }
     createHearts();
-  </script>
+
+  // Balloon, Flower, Cake, and Confetti Animation (Up + Left movement)
+  function createFloatingEmoji() {
+    const emojis = [
+      "🎂", "🎊", "💐", "🎀", "🌹", "🌷", "🌻", "🌼", "🪷"
+    ];
+    const emoji = document.createElement('div');
+    emoji.className = 'floating-emoji';
+    emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    // Start at a random left position
+    const startLeft = Math.random() * 90;
+    emoji.style.left = startLeft + 'vw';
+    // Randomize animation duration and horizontal drift
+    const duration = (5 + Math.random() * 4) + 's';
+    const drift = 10 + Math.random() * 30; // how much to move left
+    emoji.style.setProperty('--drift', drift + 'vw');
+    emoji.style.fontSize = (32 + Math.random() * 18) + 'px';
+    emoji.style.animation = `balloonUpLeft ${duration} linear forwards`;
+    document.body.appendChild(emoji);
+    setTimeout(() => emoji.remove(), 9000);
+  }
+  setInterval(createFloatingEmoji, 900);
+
+  // Add CSS for floating emojis (up + left)
+  const emojiStyle = document.createElement('style');
+  emojiStyle.textContent = `
+    @keyframes balloonUpLeft {
+      0% {
+        bottom: -60px;
+        opacity: 0.7;
+        transform: translateX(0);
+      }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% {
+        bottom: 110vh;
+        opacity: 0;
+        transform: translateX(calc(-1 * var(--drift, 20vw)));
+      }
+    }
+    .floating-emoji {
+      position: fixed;
+      bottom: -60px;
+      left: 0;
+      z-index: 13;
+      pointer-events: none;
+      user-select: none;
+      animation: balloonUpLeft 7s linear forwards;
+      transition: filter 0.2s;
+      will-change: transform, opacity;
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.10));
+    }
+  `;
+  document.head.appendChild(emojiStyle);
+
+
+</script>
 </body>
 </html>
