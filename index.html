@@ -1,6 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Add these lines inside your <head> tag, before <style> -->
+<link href="https://fonts.googleapis.com/css?family=Pacifico|Dancing+Script|Lobster|Montserrat|Poppins&display=swap" rel="stylesheet">
+
+<style>
+/* Use Pacifico for the main greeting */
+.birthday-text, .birthday-card h1 {
+  font-family: 'Pacifico', 'Dancing Script', 'Lobster', cursive;
+  letter-spacing: 1px;
+}
+
+/* Use Montserrat or Poppins for the rest of the card */
+body, .typing-effect, .rainbow-button, .memory-card, .highlight, .message, .container, .birthday-card {
+  font-family: 'Montserrat', 'Poppins', 'Segoe UI', 'Comic Neue', cursive, sans-serif;
+}
+</style>
   <meta charset="UTF-9">
   <title>Happy Birthday, Srishti! 🌟</title>
   <style>
@@ -439,6 +454,7 @@ function createFirework(x, y) {
 
   setTimeout(() => firework.remove(), 900);
 }
+    
 
     // Heartfelt message for typing effect
     const heartfeltMessage = 
